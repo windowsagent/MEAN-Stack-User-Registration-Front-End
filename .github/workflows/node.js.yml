@@ -19,8 +19,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env: 
-      node-version: 8.x
       
     steps:
     - name: Checkout code
@@ -29,7 +27,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 8.x
         cache: 'npm'
 
     - name: Install Dependencies
