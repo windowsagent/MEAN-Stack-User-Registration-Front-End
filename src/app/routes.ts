@@ -4,10 +4,10 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 
 export const appRoutes: Routes = [
     {
-        path: 'signup', component: UserComponent,
+        path: '', component: UserComponent,
         children: [{ path: '', component: SignUpComponent }]
     },
     {
-        path: '', redirectTo: '/', pathMatch: 'full'
+        path: '', redirectTo: '', pathMatch: 'full'
     }
 ];
