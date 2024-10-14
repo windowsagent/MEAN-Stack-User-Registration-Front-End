@@ -19,11 +19,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [7.x, 8.x]
-
+    env: 
+      node-version: 8.x
+      
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
