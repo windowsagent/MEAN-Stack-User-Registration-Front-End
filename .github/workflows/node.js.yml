@@ -39,10 +39,9 @@ jobs:
     - name: Get AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
-        role-to-assume: arn:aws:iam::454127780570:role/github
+        role-to-assume: arn:aws:iam::454127780570:role/GithubActions
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
-    - run: aws sts get-caller-identity
 
     - name: Deploy to S3
       run: aws s3 sync dist/ s3://my-personal-angular-site --delete
