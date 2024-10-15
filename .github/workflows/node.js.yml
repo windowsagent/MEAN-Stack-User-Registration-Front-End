@@ -1,0 +1,49 @@
+name: Build and Deploy Angular to S3
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  AWS_REGION : "us-east-1"
+  BUCKET_NAME: "www.global-triangles-site"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: 8.x
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Angular Site
+      run: npm run build --if-present
+
+    - name: Get AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        role-to-assume: arn:aws:iam::454127780570:role/github
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ env.AWS_REGION }}
+    - run: aws sts get-caller-identity
+
+    - name: Deploy to S3
+      run: aws s3 sync dist/Angular6 s3://${{ env.BUCKET_NAME }} --delete
