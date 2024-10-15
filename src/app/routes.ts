@@ -8,6 +8,6 @@ export const appRoutes: Routes = [
         children: [{ path: '', component: SignUpComponent }]
     },
     {
-        path: '', redirectTo: '/', pathMatch: 'full'
+        path: '', redirectTo: '/signup', pathMatch: 'full'
     }
 ];
