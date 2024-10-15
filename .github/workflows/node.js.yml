@@ -46,4 +46,4 @@ jobs:
     - run: aws sts get-caller-identity
 
     - name: Deploy to S3
-      run: aws s3 sync dist/Angular6 s3://${{ env.BUCKET_NAME }} --delete
+      run: aws s3 sync dist/ s3://${{ env.BUCKET_NAME }} --delete
